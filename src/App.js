@@ -1,63 +1,43 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
 import './App.css';
-import "@fontsource/bigelow-rules";
+import '@fontsource/bigelow-rules';
 
-class App extends Component {
-  constructor() {
-    super();
+const App = () => {
+  const [searchText, setSearchText] = useState('');
+  const [monsters, setMonsters] = useState([]);
+  const [filteredMonsters, setFilteredMonsters] = useState([]);
 
-    this.state = {
-      monsters: [],
-      searchText: '',
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
-      .then((users) =>
-        this.setState(
-          () => {
-            return { monsters: users };
-          },
-          () => {
-            console.log('componentDidMount...', this.state);
-          }
-        )
-      );
-  }
+      .then((users) => setMonsters(users));
+  }, []);
 
-  onSearchChange = (e) => {
-    const searchText = e.target.value.toLowerCase();
-    this.setState(() => {
-      return {
-        searchText,
-      };
-    });
-  };
-
-  render() {
-    const { monsters, searchText } = this.state;
-    const { onSearchChange } = this;
-
-    const filteredMonsters = monsters.filter((monster) => {
+  useEffect(() => {
+    const newfilteredMonsters = monsters.filter((monster) => {
       return monster.name.toLowerCase().includes(searchText);
     });
+    setFilteredMonsters(newfilteredMonsters);
+  }, [monsters, searchText]);
 
-    return (
-      <div className='App'>
-        <h1 className='app-title'>Monsters Rolodex</h1>
-        <SearchBox
-          placeholder={'search monsters'}
-          className={'monsters-search-box'}
-          onChangeHandler={onSearchChange}
-        />
-        <CardList users={filteredMonsters} />
-      </div>
-    );
-  }
-}
+  const onSearchChange = (e) => {
+    const searchTextString = e.target.value.toLowerCase();
+    setSearchText(searchTextString);
+  };
+
+  return (
+    <div className='App'>
+      <h1 className='app-title'>Monsters Rolodex</h1>
+      <SearchBox
+        placeholder={'search monsters'}
+        className={'monsters-search-box'}
+        onChangeHandler={onSearchChange}
+      />
+      <CardList users={filteredMonsters} />
+    </div>
+  );
+};
 
 export default App;
