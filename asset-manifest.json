@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/monsters-rolodex/static/css/main.6cbec2bf.css",
-    "main.js": "/monsters-rolodex/static/js/main.6ca4803e.js",
+    "main.css": "/monsters-rolodex/static/css/main.3add26ff.css",
+    "main.js": "/monsters-rolodex/static/js/main.addb99bd.js",
     "static/js/787.e4e9b7ff.chunk.js": "/monsters-rolodex/static/js/787.e4e9b7ff.chunk.js",
     "static/media/bigelow-rules-all-400-normal.woff": "/monsters-rolodex/static/media/bigelow-rules-all-400-normal.8c6eb5410b5e9804312d.woff",
     "static/media/bigelow-rules-latin-400-normal.woff2": "/monsters-rolodex/static/media/bigelow-rules-latin-400-normal.00364ac508fdec41d68b.woff2",
     "static/media/bigelow-rules-latin-ext-400-normal.woff2": "/monsters-rolodex/static/media/bigelow-rules-latin-ext-400-normal.05a91dccdb2b89ea47e0.woff2",
     "index.html": "/monsters-rolodex/index.html",
-    "main.6cbec2bf.css.map": "/monsters-rolodex/static/css/main.6cbec2bf.css.map",
-    "main.6ca4803e.js.map": "/monsters-rolodex/static/js/main.6ca4803e.js.map",
+    "main.3add26ff.css.map": "/monsters-rolodex/static/css/main.3add26ff.css.map",
+    "main.addb99bd.js.map": "/monsters-rolodex/static/js/main.addb99bd.js.map",
     "787.e4e9b7ff.chunk.js.map": "/monsters-rolodex/static/js/787.e4e9b7ff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6cbec2bf.css",
-    "static/js/main.6ca4803e.js"
+    "static/css/main.3add26ff.css",
+    "static/js/main.addb99bd.js"
   ]
 }
