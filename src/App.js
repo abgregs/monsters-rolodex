@@ -5,8 +5,10 @@ import './App.css';
 import '@fontsource/bigelow-rules';
 
 const App = () => {
+  const defaultTitle = 'Monsters Rolodex';
   const [searchText, setSearchText] = useState('');
   const [monsters, setMonsters] = useState([]);
+  const [title, setTitle] = useState(defaultTitle);
   const [filteredMonsters, setFilteredMonsters] = useState([]);
 
   useEffect(() => {
@@ -27,13 +29,23 @@ const App = () => {
     setSearchText(searchTextString);
   };
 
+  const onTitleChange = (e) => {
+    const titleTextString = e.target.value;
+    setTitle(titleTextString !== '' ? titleTextString : defaultTitle);
+  };
+
   return (
     <div className='App'>
-      <h1 className='app-title'>Monsters Rolodex</h1>
+      <h1 className='app-title'>{title}</h1>
       <SearchBox
         placeholder={'search monsters'}
         className={'monsters-search-box'}
         onChangeHandler={onSearchChange}
+      />
+      <SearchBox
+        placeholder={'edit title'}
+        className={'title-search-box'}
+        onChangeHandler={onTitleChange}
       />
       <CardList users={filteredMonsters} />
     </div>
