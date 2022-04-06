@@ -1,20 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
+
+import { getData } from './utils/data.utils';
+
 import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
+
 import './App.css';
 import '@fontsource/bigelow-rules';
+
+export type Monster = {
+  id: string;
+  name: string;
+  email: string;
+}
 
 const App = () => {
   const defaultTitle = 'Monsters Rolodex';
   const [searchText, setSearchText] = useState('');
-  const [monsters, setMonsters] = useState([]);
+  const [monsters, setMonsters] = useState<Monster[]>([]);
   const [title, setTitle] = useState(defaultTitle);
-  const [filteredMonsters, setFilteredMonsters] = useState([]);
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => response.json())
-      .then((users) => setMonsters(users));
+    const fetchUsers = async () => {
+      const users = await getData<Monster[]>('https://jsonplaceholder.typicode.com/users');
+      setMonsters(users);
+    }
+
+    fetchUsers();
   }, []);
 
   useEffect(() => {
@@ -24,12 +37,12 @@ const App = () => {
     setFilteredMonsters(newfilteredMonsters);
   }, [monsters, searchText]);
 
-  const onSearchChange = (e) => {
+  const onSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const searchTextString = e.target.value.toLowerCase();
     setSearchText(searchTextString);
   };
 
-  const onTitleChange = (e) => {
+  const onTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const titleTextString = e.target.value;
     setTitle(titleTextString !== '' ? titleTextString : defaultTitle);
   };
@@ -47,7 +60,7 @@ const App = () => {
         className={'title-search-box'}
         onChangeHandler={onTitleChange}
       />
-      <CardList users={filteredMonsters} />
+      <CardList monsters={filteredMonsters} />
     </div>
   );
 };
