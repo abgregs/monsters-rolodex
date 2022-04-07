@@ -11,6 +11,7 @@ The app itself is relatively simple. The project involved reorganizing and rewri
 * Mapping arrays to elements in JSX
 * Component organization and folder structure
 * Passing and destructuring props
+* Static type checking with TypeScript
 
 ## View the Project
 
