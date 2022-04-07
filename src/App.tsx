@@ -13,8 +13,9 @@ export type Monster = {
   email: string;
 };
 
+const defaultTitle = 'Monsters Rolodex';
+
 const App = () => {
-  const defaultTitle = 'Monsters Rolodex';
   const [searchText, setSearchText] = useState('');
   const [monsters, setMonsters] = useState<Monster[]>([]);
   const [title, setTitle] = useState(defaultTitle);
