@@ -1,18 +1,17 @@
-import { useEffect, useState, ChangeEvent } from 'react';
+import { useEffect, useState, ChangeEvent, MouseEvent } from 'react';
 
 import { getData } from './utils/data.utils';
 
 import CardList from './components/card-list/card-list.component';
-import SearchBox from './components/search-box/search-box.component';
+import InputBox from './components/input-box/input-box.component';
 
 import './App.css';
-import '@fontsource/bigelow-rules';
 
 export type Monster = {
   id: string;
   name: string;
   email: string;
-}
+};
 
 const App = () => {
   const defaultTitle = 'Monsters Rolodex';
@@ -23,9 +22,11 @@ const App = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const users = await getData<Monster[]>('https://jsonplaceholder.typicode.com/users');
+      const users = await getData<Monster[]>(
+        'https://jsonplaceholder.typicode.com/users'
+      );
       setMonsters(users);
-    }
+    };
 
     fetchUsers();
   }, []);
@@ -47,20 +48,41 @@ const App = () => {
     setTitle(titleTextString !== '' ? titleTextString : defaultTitle);
   };
 
+  const clearSearch = (event: MouseEvent): void => {
+    setSearchText('');
+  };
+
+  const clearTitle = (event: MouseEvent): void => {
+    setTitle(defaultTitle);
+  };
+
   return (
     <div className='App'>
-      <h1 className='app-title'>{title}</h1>
-      <SearchBox
-        placeholder={'search monsters'}
-        className={'monsters-search-box'}
-        onChangeHandler={onSearchChange}
-      />
-      <SearchBox
-        placeholder={'edit title'}
-        className={'title-search-box'}
-        onChangeHandler={onTitleChange}
-      />
-      <CardList monsters={filteredMonsters} />
+      <div className='container'>
+        <header className='header'>
+          <InputBox
+            placeholder={'edit title'}
+            className={'title-search-box'}
+            onChangeHandler={onTitleChange}
+            onClearHandler={clearTitle}
+            hasInput={title !== defaultTitle}
+            inputValue={title === defaultTitle ? '' : title}
+          />
+          <h1 className='app-title'>{title}</h1>
+        </header>
+        <section className='monsters-search-container'>
+          <InputBox
+            placeholder={'search monsters'}
+            className={'monsters-search-box'}
+            onChangeHandler={onSearchChange}
+            onClearHandler={clearSearch}
+            isSearch={searchText === ''}
+            hasInput={searchText !== ''}
+            inputValue={searchText}
+          />
+          <CardList monsters={filteredMonsters} />
+        </section>
+      </div>
     </div>
   );
 };
