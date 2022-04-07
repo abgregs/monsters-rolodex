@@ -4,13 +4,17 @@ body {
 }
 
 .header {
-  @apply mt-4 mb-12 sm:mt-8 sm:mb-16;
+  @apply mt-8 mb-12 sm:mt-12 sm:mb-16;
 }
 
 .app-title {
-  @apply block font-rubik-moonrocks text-gray-100 text-3xl sm:text-5xl md:text-7xl w-full;
+  @apply block font-rubik-moonrocks text-gray-100 text-5xl sm:text-6xl md:text-7xl w-full;
 }
 
 .monsters-search-container .input-box-container {
+  @apply mb-12;
+}
+
+section {
   @apply mb-12;
 }
